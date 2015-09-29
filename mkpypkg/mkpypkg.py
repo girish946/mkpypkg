@@ -21,7 +21,7 @@ questions = {'name' :'please enter the project name ', 'version': 'please enter 
              'url': 'please enter the project url ', 'packages':'packages in this project (comma seprated list) ',\
              'install_requires': 'the packages required to install this project (comma seprated list)  ' }
 
-sequence = ['name' , 'version' , 'author', 'author_email' , 'url', 'packages' , 'install_requires']
+sequence = ['name' , 'version' , 'author', 'author_email', 'description', 'url', 'packages' , 'install_requires']
 
 config= {}
 
@@ -31,12 +31,16 @@ for s in sequence:
     #config[s] = raw_input( ":: "+ questions[s])
     if s == 'install_requires' or s == 'packages':
         confstr = confstr + s+" = "+ str(raw_input( ":: "+ questions[s]).split(',')) +" ,\n     "
+    elif s == 'description':
+        confstr = confstr + s +' = ("'+ str(raw_input(':: '+ questions[s]))+'") , \n     '
     else:
         confstr = confstr + s+" = '"+ raw_input( ":: "+ questions[s]) +"' ,\n     "
 
+confstr = confstr + "long_description=read('README'),\n     "
 
-print confstr
 
-print"\n\n\n\n this is the complete file \n\n\n\n\n"
+#print confstr
+
+#print"\n\n\n\n this is the complete file \n\n\n\n\n"
 
 print static_string + str(confstr)+ "\n  )"
