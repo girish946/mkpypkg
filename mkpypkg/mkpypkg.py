@@ -21,7 +21,7 @@ questions = {'name' :'please enter the project name ', 'version': 'please enter 
              'url': 'please enter the project url ', 'packages':'packages in this project (comma seprated list) ',\
              'install_requires': 'the packages required to install this project (comma seprated list)  ' }
 
-sequence = ['name' , 'version' , 'author', 'author_email', 'description', 'url', 'packages' , 'install_requires']
+sequence = ['name' , 'version' , 'author', 'author_email', 'description', 'url', 'packages' , 'install_requires', 'keywords']
 
 config= {}
 
@@ -44,3 +44,9 @@ confstr = confstr + "long_description=read('README'),\n     "
 #print"\n\n\n\n this is the complete file \n\n\n\n\n"
 
 print static_string + str(confstr)+ "\n  )"
+
+f = open('setup.py' , 'w')
+
+f.write(static_string + str(confstr)+ "\n  )")
+f.close()
+
