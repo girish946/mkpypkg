@@ -1,2 +1,2 @@
-include MANIFEST.in README.MD setup.py LICENSE
+include MANIFEST.in README.MD setup.py LICENSE mkpip
 recursive-include mkpypkg docs *.py *.rst *.css *.html *.js

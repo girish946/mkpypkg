@@ -24,16 +24,14 @@ questions = {'name' :('please enter the project name ',os.getcwd().split(os.sep)
              'keywords': ('please enter the keywords ',' ',),\
              'url': ('please enter the project url ','www.something.com',), \
              'packages':('packages in this project (comma seprated list) ', '',),\
-             'install_requires': ('the packages required to install this project (comma seprated list)  ','',) }
+             'install_requires': ('the packages required to install this project (comma seprated list)  ','',),\
+             'scripts': ('the scripts in this package ','',)
+            }
 
-sequence = ['name' , 'version' , 'author', 'author_email', 'description', 'url', 'packages' , 'install_requires', 'keywords']
+sequence = ['name' , 'version' , 'author', 'author_email', 'description', 'url', 'packages' , 'install_requires', 'keywords', 'scripts']
 
 config= {}
 
-confstr = "\n    "
-
-
-print questions['author'][1]
 
 def getInput(text):
     temp = raw_input( ":: "+ questions[text][0])
@@ -42,29 +40,34 @@ def getInput(text):
 
     return temp
 
+def getConfigInput():
+    for s in sequence:
+        if s == 'install_requires' or s == 'packages' or s =='scripts':
+            config[s] = " = "+ str(getInput(s).split(',')) + ", \n    "
 
-for s in sequence:
-    if s == 'install_requires' or s == 'packages':
-        config[s] = " = "+ str(getInput(s).split(',')) + ", \n    "
+        elif s == 'description':
+            config[s] = ' = ("' +getInput(s)+ '") , \n    '
 
-    elif s == 'description':
-        config[s] = ' = ("' +getInput(s)+ '") , \n    '
+        else:
+            config[s] = " = '"+ getInput(s) +"' ,\n    "
 
-    else:
-        config[s] = "= '"+ getInput(s) +"' ,\n    "
-
-
-for s in sequence:
-    confstr += s + config[s]
-
-confstr+= "long_description read('README'),\n    "
+def generateConfigString():
     
-print static_string + str(confstr)+ "\n  )"
+    confstr = "\n    "
 
+    for s in sequence:
+        confstr += s + config[s]
 
+    confstr+= "long_description = read('README'),\n    "
+    
+    print(static_string + str(confstr)+ "\n  )")
 
-f = open('setup.py' , 'w')
+    return static_string + str(confstr)
 
-f.write(static_string + str(confstr)+ "\n  )")
-f.close()
+def writeSetup(confstr):
+    f = open('setup.py' , 'w')
+    
+    f.write(confstr + "\n  )")
+    f.close()
+
 
