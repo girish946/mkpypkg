@@ -7,6 +7,8 @@ to install on Ubuntu.
 
     $apt-get update
 
-    $apt-get install mkmypkg
+    $apt-get install mkpypkg
 
+to install from pip
 
+    $pip install mkpypkg
