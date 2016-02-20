@@ -10,8 +10,8 @@ from setuptools import setup
 # Used for the long_description.  It's nice, because now 1) we have a top level
 # README file and 2) it's easier to type in the README file than to put a raw
 # string in below ...
-def read(fname):
-    return open( fname).read()
+#def read(fname):
+#    return open( fname).read()
 
 setup("""
 
@@ -76,7 +76,7 @@ def generateConfigString():
     for s in sequence:
         confstr += s + config[s]
 
-    confstr += "long_description = read('README'),\n    "
+    confstr += "long_description = 'Enter your description :',\n    "
     print (static_string + str(confstr) + "\n  )")
 
     return static_string + str(confstr)
